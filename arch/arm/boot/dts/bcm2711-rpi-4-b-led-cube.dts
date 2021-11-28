@@ -68,6 +68,12 @@
 		enable-active-high;
 		gpio = <&expgpio 6 GPIO_ACTIVE_HIGH>;
 	};
+
+	ledcube-codec {
+		#sound-dai-cells = <0>;
+		compatible = "ledcube,ledcube-codec";
+		status = "okay";
+	};
 };
 
 &ddc0 {
@@ -576,10 +582,17 @@
 &i2s {
 	pinctrl-names = "default";
 	pinctrl-0 = <&i2s_pins>;
+	status = "okay";
 };
 
 // =============================================
 // Board specific stuff here
+
+&sound {
+	compatible = "ledcube,ledcube-soundcard";
+	i2s-controller = <&i2s>;
+	status = "okay";
+};
 
 &sdhost {
 	status = "disabled";

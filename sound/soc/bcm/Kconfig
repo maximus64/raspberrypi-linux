@@ -41,6 +41,13 @@ config SND_BCM2708_SOC_GOOGLEVOICEHAT_SOUNDCARD
 	help
           Say Y or M if you want to add support for voiceHAT soundcard.
 
+config SND_BCM2708_SOC_LEDCUBE_SOUNDCARD
+	tristate "Support for LED Cube soundcard"
+	depends on SND_BCM2708_SOC_I2S || SND_BCM2835_SOC_I2S
+	select SND_RPI_SIMPLE_SOUNDCARD
+	help
+	  Say Y or M if you want to add support for LED Cube soundcard.
+
 config SND_BCM2708_SOC_HIFIBERRY_DAC
         tristate "Support for HifiBerry DAC"
         depends on SND_BCM2708_SOC_I2S || SND_BCM2835_SOC_I2S
