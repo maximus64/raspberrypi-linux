@@ -577,6 +577,13 @@
 		reg = <0x69>;
 		status = "okay";
 	};
+
+	// battery current shunt
+	current_sense: ina219@40 {
+		compatible = "ti,ina219";
+		reg = <0x40>;
+		shunt-resistor = <3000>; /* = 3 mOhms */
+	};
 };
 
 &i2s {
