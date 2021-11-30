@@ -263,6 +263,7 @@ static int iproc_rng200_probe(struct platform_device *pdev)
 
 	priv->rng.name = pdev->name;
 	priv->rng.cleanup = iproc_rng200_cleanup;
+	priv->rng.quality = 1000;
 
 	if (of_device_is_compatible(dev->of_node, "brcm,bcm2711-rng200")) {
 		priv->rng.init = bcm2711_rng200_init;
