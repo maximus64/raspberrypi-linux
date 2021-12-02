@@ -643,7 +643,25 @@
 	gpio = <&expgpio 5 GPIO_ACTIVE_HIGH>;
 };
 
+/* enable bluetooth */
 &bt {
+	status = "okay";
+};
+
+/* enable V3D GPU */
+&v3d {
+	status = "okay";
+};
+
+&vc4 {
+	status = "okay";
+};
+
+&fb {
+	status = "disabled";
+};
+
+&firmwarekms {
 	status = "okay";
 };
 
