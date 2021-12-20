@@ -1079,6 +1079,7 @@ static void joycon_input_report_parse_imu_data(struct joycon_ctlr *ctlr,
 	}
 }
 
+#if IS_ENABLED(CONFIG_NINTENDO_IMU)
 static void joycon_parse_imu_report(struct joycon_ctlr *ctlr,
 				    struct joycon_input_report *rep)
 {
@@ -1275,6 +1276,8 @@ static void joycon_parse_imu_report(struct joycon_ctlr *ctlr,
 		ctlr->imu_timestamp_us += ctlr->imu_avg_delta_ms * 1000 / 3;
 	}
 }
+#endif /* IS_ENABLED(CONFIG_NINTENDO_IMU) */
+
 
 static void joycon_parse_report(struct joycon_ctlr *ctlr,
 				struct joycon_input_report *rep)
@@ -1436,9 +1439,11 @@ static void joycon_parse_report(struct joycon_ctlr *ctlr,
 		wake_up(&ctlr->wait);
 	}
 
+#if IS_ENABLED(CONFIG_NINTENDO_IMU)
 	/* parse IMU data if present */
 	if (rep->id == JC_INPUT_IMU_DATA)
 		joycon_parse_imu_report(ctlr, rep);
+#endif /* IS_ENABLED(CONFIG_NINTENDO_IMU) */
 }
 
 static int joycon_send_rumble_data(struct joycon_ctlr *ctlr)
@@ -1767,6 +1772,7 @@ static int joycon_input_create(struct joycon_ctlr *ctlr)
 	if (ret)
 		return ret;
 
+#if IS_ENABLED(CONFIG_NINTENDO_IMU)
 	/* configure the imu input device */
 	ctlr->imu_input = devm_input_allocate_device(&hdev->dev);
 	if (!ctlr->imu_input)
@@ -1815,6 +1821,7 @@ static int joycon_input_create(struct joycon_ctlr *ctlr)
 	ret = input_register_device(ctlr->imu_input);
 	if (ret)
 		return ret;
+#endif /* IS_ENABLED(CONFIG_NINTENDO_IMU) */
 
 	return 0;
 }
